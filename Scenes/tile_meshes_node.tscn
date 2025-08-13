@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://4bodt6p7nwt4"]
+
+[ext_resource type="PackedScene" uid="uid://div148l76xu44" path="res://3dAssets/tile_gridmap_meshes.glb" id="1_i1wrn"]
+
+[node name="tile_meshes_node" type="Node3D"]
+
+[node name="tile_gridmap_meshes" parent="." instance=ExtResource("1_i1wrn")]
+
+[node name="plane" parent="tile_gridmap_meshes" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="short_plane_60" parent="tile_gridmap_meshes" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="tall_plane_60" parent="tile_gridmap_meshes" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="plane2" parent="tile_gridmap_meshes" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[editable path="tile_gridmap_meshes"]

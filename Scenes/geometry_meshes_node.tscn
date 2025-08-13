@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvgse4faqelfx"]
+
+[ext_resource type="PackedScene" uid="uid://bvx15vsorfp2l" path="res://3dAssets/geometry_gridmap_meshes.glb" id="1_e1wjm"]
+
+[node name="GeometryMeshesNode" type="Node3D"]
+
+[node name="geometry_gridmap_meshes" parent="." instance=ExtResource("1_e1wjm")]
+
+[node name="cube" parent="geometry_gridmap_meshes" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="short_ramp_60" parent="geometry_gridmap_meshes" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="tall_ramp_60" parent="geometry_gridmap_meshes" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="cube2" parent="geometry_gridmap_meshes" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="plane" parent="geometry_gridmap_meshes" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[editable path="geometry_gridmap_meshes"]

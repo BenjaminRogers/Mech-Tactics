@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvp7mmwk8ah4r"]
+
+[ext_resource type="PackedScene" uid="uid://ckouewo53hqe1" path="res://3dAssets/PlayerMesh.glb" id="1_5nye3"]
+
+[node name="PlayerMesh" instance=ExtResource("1_5nye3")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/8/rotation = Quaternion(-0.707012, -0.0115523, -0.0115523, 0.707012)
+bones/9/rotation = Quaternion(-2.07306e-08, 4.62458e-09, 0.0169768, 0.999856)
+bones/11/rotation = Quaternion(-0.707107, 2.66925e-08, -2.66925e-08, 0.707107)
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "freehand_idle"

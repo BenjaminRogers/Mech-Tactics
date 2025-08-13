@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://de1vdobp8i5st"]
+
+[ext_resource type="PackedScene" uid="uid://bvx15vsorfp2l" path="res://3dAssets/geometry_gridmap_meshes.glb" id="1_vemqx"]
+
+[node name="geometry_gridmap_meshes" instance=ExtResource("1_vemqx")]

@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://d4nc47pri16hg"]
+
+[ext_resource type="Script" uid="uid://co2s1iak7rj4u" path="res://scripts/ground_cursor.gd" id="1_261ax"]
+[ext_resource type="PackedScene" uid="uid://b6oaa18lwu088" path="res://3dAssets/ground_cursor.glb" id="2_bx16x"]
+[ext_resource type="Script" uid="uid://blouib3bbr5qw" path="res://scripts/camera_rig.gd" id="3_bx16x"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3dryh"]
+size = Vector3(2, 0.05, 2)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bx16x"]
+margin = 0.05
+
+[node name="GroundCursor" type="AnimatableBody3D"]
+script = ExtResource("1_261ax")
+
+[node name="ground_cursor_mesh" parent="." instance=ExtResource("2_bx16x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_3dryh")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("SphereShape3D_bx16x")
+script = ExtResource("3_bx16x")
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.777)
+current = true
