@@ -21,14 +21,19 @@ func _ready() -> void:
 				if abs(astar.get_point_position(neighbor_id).x - current_x) == 1:
 					astar.connect_points(current_id, neighbor_id)
 					continue
-			
-	print(astar.get_point_path(0, 15))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
 
-func _on_ground_cursor_get_tile_coordinates(position: Vector3) -> void:
-	#pass # Replace with function body.
-	%GroundCursor.grid_coordinates = local_to_map(position) # Replace with function body.
+func _on_ground_cursor_get_tile_id(coordinates: Vector3) -> void:
+	for point in astar.get_point_ids():
+		var current_points_position = astar.get_point_position(point)
+		if current_points_position == coordinates:
+			%GroundCursor.current_tile_id = point
+			break
+
+
+func _on_ground_cursor_get_route(start_tile: int, end_tile: int) -> void:
+	print(astar.get_point_path(start_tile, end_tile)) # Replace with function body.

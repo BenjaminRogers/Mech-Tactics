@@ -41,7 +41,6 @@ metadata/_editor_floor_ = Vector3(0, -1, 0)
 
 [node name="GroundCursor" parent="GeometryGridMap" instance=ExtResource("2_xdvni")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
 
 [node name="TileGridMap" type="GridMap" parent="GeometryGridMap"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
@@ -56,5 +55,5 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 [node name="Player" parent="." instance=ExtResource("2_3vk6h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
 
-[connection signal="get_grid_coordinates" from="GeometryGridMap/GroundCursor" to="GeometryGridMap" method="_on_ground_cursor_get_grid_coordinates"]
-[connection signal="get_tile_coordinates" from="GeometryGridMap/GroundCursor" to="GeometryGridMap/TileGridMap" method="_on_ground_cursor_get_tile_coordinates"]
+[connection signal="get_route" from="GeometryGridMap/GroundCursor" to="GeometryGridMap/TileGridMap" method="_on_ground_cursor_get_route"]
+[connection signal="get_tile_id" from="GeometryGridMap/GroundCursor" to="GeometryGridMap/TileGridMap" method="_on_ground_cursor_get_tile_id"]
