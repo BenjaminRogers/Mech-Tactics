@@ -9,31 +9,35 @@ height = 1.74606
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6t5aa"]
 
-[node name="Player" type="CharacterBody3D"]
+[node name="PlayerUnitRoot" type="Node3D"]
 script = ExtResource("1_cvnsp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.865368, 0)
+[node name="Player" type="CharacterBody3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.982733, 0)
 shape = SubResource("CapsuleShape3D_6t5aa")
 debug_color = Color(0.302977, 0.607063, 0.459526, 0.42)
 
-[node name="PlayerMesh" parent="." instance=ExtResource("2_6t5aa")]
+[node name="PlayerMesh" parent="Player" instance=ExtResource("2_6t5aa")]
 transform = Transform3D(-0.999722, 0, 0.0235598, 0, 1, 0, -0.0235598, 0, -0.999722, 0, 0, 0)
 
-[node name="Skeleton3D" parent="PlayerMesh/Armature" index="0"]
+[node name="Skeleton3D" parent="Player/PlayerMesh/Armature" index="0"]
 bones/8/rotation = Quaternion(-0.707012, -0.0115523, -0.0115523, 0.707012)
 bones/9/rotation = Quaternion(-2.07306e-08, 4.62458e-09, 0.0169768, 0.999856)
 bones/11/rotation = Quaternion(-0.707107, 2.66925e-08, -2.66925e-08, 0.707107)
 
-[node name="AnimationPlayer" parent="PlayerMesh" index="1"]
+[node name="AnimationPlayer" parent="Player/PlayerMesh" index="1"]
 autoplay = "freehand_idle"
 
-[node name="SpringArm3D" type="SpringArm3D" parent="."]
+[node name="SpringArm3D" type="SpringArm3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18475, 0)
 shape = SubResource("SphereShape3D_6t5aa")
 script = ExtResource("2_vgqql")
 
-[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+[node name="Camera3D" type="Camera3D" parent="Player/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, -1.49012e-08, 0, 1.49012e-08, 1, 0, 0, 3.17094)
 
-[editable path="PlayerMesh"]
+[editable path="Player/PlayerMesh"]

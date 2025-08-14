@@ -1,5 +1,7 @@
 extends Node3D
 const GRID_UNIT = 2
+@onready var hovering_unit: PhysicsBody3D
+@onready var selected_unit: PhysicsBody3D
 var current_coordinates: Vector3
 var current_tile_id: int
 @onready var selected_tile_id: int = -1
@@ -11,16 +13,23 @@ var menu_scene = preload("res://Scenes/unit_menu.tscn")
 signal get_tile_id(position: Vector3)
 signal get_route(start_tile: int, end_tile: int)
 
+func unit_hovering(unit_body):
+	hovering_unit = unit_body
 func move_button_up():
 	get_tile_id.emit(current_coordinates)
-	print(current_tile_id)
+	selected_tile_id = current_tile_id
+	close_menu()
+	is_menu_open = false
+	is_tile_selected = true
 	
 
 func open_menu() -> void:
-	menu = menu_scene.instantiate()
-	menu.get_node("PanelContainer/MarginContainer/VBoxContainer/MoveButton").pressed.connect(move_button_up)
-	add_child(menu)
-	is_menu_open = true
+	if hovering_unit: #Only opens menu if there is a unit selected
+		menu = menu_scene.instantiate()
+		menu.get_node("PanelContainer/MarginContainer/VBoxContainer/MoveButton").pressed.connect(move_button_up)
+		add_child(menu)
+		is_menu_open = true
+		selected_unit = hovering_unit
 
 func close_menu() -> void:
 	if is_instance_valid(menu):
@@ -28,7 +37,7 @@ func close_menu() -> void:
 		menu.queue_free()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Called every frame. 'delta' is the elapsed time since the previous frame.
+	pass
 func _process(delta: float) -> void:
 	pass
 func _input(event: InputEvent) -> void:
@@ -49,7 +58,13 @@ func _input(event: InputEvent) -> void:
 			print(str("var current_coordinates : ", current_coordinates))
 			print(str("mesh position : ", global_position))
 		if event.is_action_released("accept"):
-			open_menu()
+			if is_tile_selected:
+				get_tile_id.emit(current_coordinates)
+				get_route.emit(selected_tile_id, current_tile_id)
+				is_tile_selected = false
+			else:
+					open_menu()
 	if event.is_action_released("cancel"):
 		close_menu()
-		
+	
+	
