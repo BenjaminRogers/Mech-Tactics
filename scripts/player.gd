@@ -9,14 +9,20 @@ func receive_route(route: PackedVector3Array):
 	for i in range(1, route.size()):
 		var next_position: Vector3 = (route[i])
 		var next_position_coordinates = next_position * GRID_UNIT
-		position = next_position_coordinates
+		
+		#I stole this from the internet I have no idea how or why this works wtf
+		var direction = (next_position_coordinates - global_transform.origin).normalized()
+		var target_angle = atan2(direction.x, direction.z)
+		var current_rotation = global_rotation.y
+		var new_rotation_y = target_angle
+		rotation_degrees.y = rad_to_deg(new_rotation_y) 
+		
+		position += transform.basis.z * GRID_UNIT #This makes the character move 1 tile forward :D
+		
 		await get_tree().create_timer(1).timeout
-#func turn_to(next_position):
-	#var direction_to_target = (next_position - global_position).normalized()
-	#var target_basis = Basis.looking_at(direction_to_target, Vector3.UP)
-	#global_transform.basis = target_basis
-#func move_forward(next_position):
-		#%Player.position.z -= 2
+func turn_to(direction) -> void:
+	#var yaw := atan2(direction.x, direction.z)
+	rotation.y += direction
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not %Player.is_on_floor():
