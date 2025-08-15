@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bhmdima85kn5g"]
+[gd_scene load_steps=11 format=3 uid="uid://bhmdima85kn5g"]
 
 [ext_resource type="MeshLibrary" uid="uid://hml6tfvqal35" path="res://3dAssets/MeshLibraries/geometry_mesh_lib.tres" id="1_t3or0"]
 [ext_resource type="PackedScene" uid="uid://drwct8g02fyi7" path="res://Scenes/player.tscn" id="2_ysn8j"]
@@ -6,6 +6,7 @@
 [ext_resource type="MeshLibrary" uid="uid://chvd04isqgidu" path="res://3dAssets/MeshLibraries/tile_mesh_lib.tres" id="4_kylad"]
 [ext_resource type="Script" uid="uid://chim21g82hxay" path="res://scripts/tile_grid_map.gd" id="5_bdlbp"]
 [ext_resource type="Script" uid="uid://04nqipoq2qq5" path="res://Scenes/path_manager.gd" id="6_2h8qs"]
+[ext_resource type="PackedScene" uid="uid://dqp27idp4u6lh" path="res://menu_manager.tscn" id="7_ysn8j"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_folls"]
 sky_top_color = Color(0.31324, 0.440968, 0.704448, 1)
@@ -31,6 +32,7 @@ transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("2_ysn8j")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 
 [node name="GroundCursor" parent="." instance=ExtResource("3_6ll4n")]
@@ -62,6 +64,8 @@ data = {
 "cells": PackedInt32Array(-65536, 0, 0, -65536, 1, 0, -65536, 2, 0, -65536, 3, 0, -65536, 4, 0, -65536, 5, 0, -65536, 6, 0, -65536, 7, 0, -65536, 8, 0, -65536, 9, 0, -65535, 0, 0, -65535, 1, 0, -65535, 2, 0, -65535, 3, 0, -65535, 4, 0, -65535, 5, 0, -65535, 6, 0, -65535, 7, 0, -65535, 8, 0, -65535, 9, 0, -65534, 0, 0, -65534, 1, 0, -65534, 2, 0, -65534, 3, 0, -65534, 4, 0, -65534, 5, 0, -65534, 6, 0, -65534, 7, 0, -65534, 8, 0, -65534, 9, 0, -65533, 0, 0, -65533, 1, 0, -65533, 2, 0, -65533, 3, 0, -65533, 4, 0, -65533, 5, 0, -65533, 6, 0, -65533, 7, 0, -65533, 8, 0, -65533, 9, 0, -65532, 0, 0, -65532, 1, 0, -65532, 2, 0, -65532, 3, 0, -65532, 4, 0, -65532, 5, 0, -65532, 6, 0, -65532, 7, 0, -65532, 8, 0, -65532, 9, 0, -65531, 0, 0, -65531, 1, 0, -65531, 2, 0, -65531, 3, 0, -65531, 4, 0, -65531, 5, 0, -65531, 6, 0, -65531, 7, 0, -65531, 8, 0, -65531, 9, 0, -65530, 0, 0, -65530, 1, 0, -65530, 2, 0, -65530, 3, 0, -65530, 4, 0, -65530, 5, 0, -65530, 6, 0, -65530, 7, 0, -65530, 8, 0, -65530, 9, 0, -65529, 0, 0, -65529, 1, 0, -65529, 2, 0, -65529, 3, 0, -65529, 4, 0, -65529, 5, 0, -65529, 6, 0, -65529, 7, 0, -65529, 8, 0, -65529, 9, 0, -65528, 0, 0, -65528, 1, 0, -65528, 2, 0, -65528, 3, 0, -65528, 4, 0, -65528, 5, 0, -65528, 6, 0, -65528, 7, 0, -65528, 8, 0, -65528, 9, 0, -65527, 0, 0, -65527, 1, 0, -65527, 2, 0, -65527, 3, 0, -65527, 4, 0, -65527, 5, 0, -65527, 6, 0, -65527, 7, 0, -65527, 8, 0, -65527, 9, 0, -65534, 65532, 0, -65535, 65532, 0, -65535, 65533, 0, -65534, 65533, 0)
 }
 metadata/_editor_floor_ = Vector3(0, -1, 0)
+
+[node name="MenuManager" parent="." instance=ExtResource("7_ysn8j")]
 
 [connection signal="get_route" from="GroundCursor" to="PathManager" method="_on_ground_cursor_get_route"]
 [connection signal="get_tile_id" from="GroundCursor" to="PathManager" method="_on_ground_cursor_get_tile_id"]

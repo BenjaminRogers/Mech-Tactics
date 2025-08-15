@@ -57,6 +57,7 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed("print_debug"):
 			print(str("var current_coordinates : ", current_coordinates))
 			print(str("mesh position : ", global_position))
+			print(str("Player mesh position: ", %Player.global_position))
 		if event.is_action_released("accept"):
 			if is_tile_selected:
 				get_tile_id.emit(current_coordinates)

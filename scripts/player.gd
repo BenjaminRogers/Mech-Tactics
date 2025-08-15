@@ -6,20 +6,24 @@ const GRID_UNIT = 2
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 func receive_route(route: PackedVector3Array):
+	var current_delta = get_process_delta_time()
 	for i in range(1, route.size()):
 		var next_position: Vector3 = (route[i])
 		var next_position_coordinates = next_position * GRID_UNIT
-		
 		#I stole this from the internet I have no idea how or why this works wtf
 		var direction = (next_position_coordinates - global_transform.origin).normalized()
 		var target_angle = atan2(direction.x, direction.z)
 		var current_rotation = global_rotation.y
-		var new_rotation_y = target_angle
-		rotation_degrees.y = rad_to_deg(new_rotation_y) 
-		
-		position += transform.basis.z * GRID_UNIT #This makes the character move 1 tile forward :D
-		
-		await get_tree().create_timer(1).timeout
+		var new_rotation_y = rad_to_deg(target_angle)
+		rotation_degrees.y = new_rotation_y
+###########################################################################################
+		#position += transform.basis.z * GRID_UNIT #This makes the character move 1 tile forward instantly
+		var end_position = position + (transform.basis.z * GRID_UNIT)#This makes the character move smoothly 1 grid_unit per second
+		var movement_tween = create_tween()
+		movement_tween.tween_property(self,"position",end_position,1)#1 is the duration in seconds to move 1 tile. Need to incorporate speed at some point
+		%Player/PlayerMesh/AnimationPlayer.play("freehand_walk")
+		await movement_tween.finished
+	%Player/PlayerMesh/AnimationPlayer.play("freehand_idle")
 func turn_to(direction) -> void:
 	#var yaw := atan2(direction.x, direction.z)
 	rotation.y += direction
@@ -42,8 +46,8 @@ func _physics_process(delta: float) -> void:
 	#else:
 		#%Player.velocity.x = move_toward(%Player.velocity.x, 0, SPEED)
 		#%Player.velocity.z = move_toward(%Player.velocity.z, 0, SPEED)
-	if %Player.velocity:
-		%Player/PlayerMesh/AnimationPlayer.play("freehand_walk")
-	else:
-		%Player/PlayerMesh/AnimationPlayer.play("freehand_idle")
-	%Player.move_and_slide()
+	#if %Player.velocity:
+	#	%Player/PlayerMesh/AnimationPlayer.play("freehand_walk")
+	#else:
+	#	%Player/PlayerMesh/AnimationPlayer.play("freehand_idle")
+	#%Player.move_and_slide()
