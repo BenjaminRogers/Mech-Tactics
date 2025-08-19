@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c4pnuglwmkwks"]
 
-[ext_resource type="Script" uid="uid://da1ubufsc0470" path="res://Scenes/unit_menu.gd" id="1_d7ymi"]
+[ext_resource type="Script" uid="uid://da1ubufsc0470" path="res://Battle/Menu Templates/unit_menu.gd" id="1_d7ymi"]
 
 [node name="UnitMenu" type="Control"]
 layout_mode = 3

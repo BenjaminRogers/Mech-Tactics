@@ -18,7 +18,7 @@ script = ExtResource("1_261ax")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.5, 0)
 shape = SubResource("SphereShape3D_bx16x")
 script = ExtResource("3_bx16x")
 
@@ -26,10 +26,9 @@ script = ExtResource("3_bx16x")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.777)
 current = true
 
-[node name="Area3D" type="Area3D" parent="CharacterBody3D"]
+[node name="UnitDetectionArea" type="Area3D" parent="CharacterBody3D"]
+unique_name_in_owner = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/UnitDetectionArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_bx16x")
-
-[connection signal="body_entered" from="CharacterBody3D/Area3D" to="." method="unit_hovering"]

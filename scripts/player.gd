@@ -2,15 +2,37 @@ extends Node3D
 const GRID_UNIT = 2
 @onready var direction
 @onready var animation_player = $PlayerMesh/AnimationPlayer
-@onready var new_basis = Basis()
+@onready var mini_stats_window = %MiniStatsWindow
+### Stats ###
+@export var charge_time = 0
+@export var charge_speed = 5
+@export var max_health = 100
+@export var current_health = 42
+###       ###
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
+func initialize_menu() -> void:
+	%HPBar.max_value = max_health
+	%HPBar.value = current_health
+	%HPNumeric.text = str(current_health, "/", max_health)
+	%CTBar.value = charge_time
+func toggle_mini_stats_window_visibility() -> void:
+	if mini_stats_window.visible:
+		mini_stats_window.visible = false
+	elif mini_stats_window.visible == false:
+		mini_stats_window.visible = true
+func _ready() -> void:
+	initialize_menu()
+func move(route: PackedVector3Array) -> void:
+	pass
 func receive_route(route: PackedVector3Array):
 	var current_delta = get_process_delta_time()
 	for i in range(1, route.size()):
 		var next_position: Vector3 = (route[i])
 		var next_position_coordinates = next_position * GRID_UNIT
-		#I stole this from the internet I have no idea how or why this works wtf
+
+##########################################################################################
+		#I stole this from the internet I have no idea how or why this works
 		var direction = (next_position_coordinates - global_transform.origin).normalized()
 		var target_angle = atan2(direction.x, direction.z)
 		var current_rotation = global_rotation.y
@@ -51,3 +73,6 @@ func _physics_process(delta: float) -> void:
 	#else:
 	#	%Player/PlayerMesh/AnimationPlayer.play("freehand_idle")
 	#%Player.move_and_slide()
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("jump_debug"):
+		current_health -= 5

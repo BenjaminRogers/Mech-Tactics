@@ -1,16 +1,18 @@
 extends Node3D
 var astar = AStar3D.new()
+
 signal calculated_route(route_array: PackedVector3Array)
-func _on_ground_cursor_get_tile_id(coordinates: Vector3) -> void:
+
+func get_tile_id(grid_position: Vector3) -> int:
 	for point in astar.get_point_ids():
 		var current_points_position = astar.get_point_position(point)
-		if current_points_position == coordinates:
-			%GroundCursor.current_tile_id = point
-			break
+		if current_points_position == grid_position:
+			return point
+	return -1 #This should never happen
 
 func _on_ground_cursor_get_route(start_tile: int, end_tile: int) -> void:
 	var route = astar.get_point_path(start_tile, end_tile)
-	calculated_route.emit(route) # Replace with function body.
+	calculated_route.emit(route)
 
 func _ready() -> void:
 	for tile_position in %TileGridMap.get_used_cells(): #Iterates through tiles and creates astar points

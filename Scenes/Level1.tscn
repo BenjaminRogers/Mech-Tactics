@@ -1,12 +1,12 @@
 [gd_scene load_steps=11 format=3 uid="uid://bhmdima85kn5g"]
 
 [ext_resource type="MeshLibrary" uid="uid://hml6tfvqal35" path="res://3dAssets/MeshLibraries/geometry_mesh_lib.tres" id="1_t3or0"]
+[ext_resource type="PackedScene" uid="uid://d0od72qwppq6e" path="res://Battle/unit_manager.tscn" id="1_ysn8j"]
 [ext_resource type="PackedScene" uid="uid://drwct8g02fyi7" path="res://Scenes/player.tscn" id="2_ysn8j"]
 [ext_resource type="PackedScene" uid="uid://d4nc47pri16hg" path="res://Scenes/ground_cursor.tscn" id="3_6ll4n"]
 [ext_resource type="MeshLibrary" uid="uid://chvd04isqgidu" path="res://3dAssets/MeshLibraries/tile_mesh_lib.tres" id="4_kylad"]
 [ext_resource type="Script" uid="uid://chim21g82hxay" path="res://scripts/tile_grid_map.gd" id="5_bdlbp"]
 [ext_resource type="Script" uid="uid://04nqipoq2qq5" path="res://Scenes/path_manager.gd" id="6_2h8qs"]
-[ext_resource type="PackedScene" uid="uid://dqp27idp4u6lh" path="res://menu_manager.tscn" id="7_ysn8j"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_folls"]
 sky_top_color = Color(0.31324, 0.440968, 0.704448, 1)
@@ -24,21 +24,20 @@ tonemap_mode = 2
 
 [node name="Level1Root" type="Node3D"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_xdvni")
+[node name="UnitManager" parent="." instance=ExtResource("1_ysn8j")]
+unique_name_in_owner = true
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 12, 0)
-shadow_enabled = true
-
-[node name="Player" parent="." instance=ExtResource("2_ysn8j")]
+[node name="Player" parent="UnitManager" instance=ExtResource("2_ysn8j")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 
-[node name="GroundCursor" parent="." instance=ExtResource("3_6ll4n")]
+[node name="Player2" parent="UnitManager" instance=ExtResource("2_ysn8j")]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+current_health = 50
 
 [node name="PathManager" type="Node3D" parent="."]
+unique_name_in_owner = true
 script = ExtResource("6_2h8qs")
 
 [node name="TileGridMap" type="GridMap" parent="PathManager"]
@@ -65,8 +64,15 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, -1, 0)
 
-[node name="MenuManager" parent="." instance=ExtResource("7_ysn8j")]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xdvni")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 12, 0)
+shadow_enabled = true
+
+[node name="GroundCursor" parent="." instance=ExtResource("3_6ll4n")]
+unique_name_in_owner = true
+
+[connection signal="calculated_route" from="PathManager" to="UnitManager/Player" method="receive_route"]
 [connection signal="get_route" from="GroundCursor" to="PathManager" method="_on_ground_cursor_get_route"]
-[connection signal="get_tile_id" from="GroundCursor" to="PathManager" method="_on_ground_cursor_get_tile_id"]
-[connection signal="calculated_route" from="PathManager" to="Player" method="receive_route"]
