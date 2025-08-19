@@ -23,9 +23,8 @@ func toggle_mini_stats_window_visibility() -> void:
 		mini_stats_window.visible = true
 func _ready() -> void:
 	initialize_menu()
+
 func move(route: PackedVector3Array) -> void:
-	pass
-func receive_route(route: PackedVector3Array):
 	var current_delta = get_process_delta_time()
 	for i in range(1, route.size()):
 		var next_position: Vector3 = (route[i])

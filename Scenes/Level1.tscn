@@ -73,6 +73,3 @@ shadow_enabled = true
 
 [node name="GroundCursor" parent="." instance=ExtResource("3_6ll4n")]
 unique_name_in_owner = true
-
-[connection signal="calculated_route" from="PathManager" to="UnitManager/Player" method="receive_route"]
-[connection signal="get_route" from="GroundCursor" to="PathManager" method="_on_ground_cursor_get_route"]

@@ -10,7 +10,6 @@ var menu_scene = preload("res://Battle/Menu Templates/unit_menu.tscn")
 @onready var is_menu_open = false
 @onready var is_tile_selected = false
 
-signal get_route(start_tile: int, end_tile: int)
 func start_turn() -> void:
 	active_unit = %UnitManager.active_unit
 
@@ -90,12 +89,13 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed("jump_debug"):
 			end_turn()
 		if event.is_action_released("accept"):
-			#if not hovered_unit:
-				#position = active_unit.position
-				#unit_hovering()
+			if not hovered_unit:
+				position = active_unit.position
+				unit_hovering()
 			if is_tile_selected:
 				current_tile_id = %PathManager.get_tile_id(current_grid_position)
-				get_route.emit(selected_tile_id, current_tile_id)
+				var movement_route = %PathManager.get_route(selected_tile_id, current_tile_id)
+				active_unit.move(movement_route)
 				is_tile_selected = false
 			else:
 					open_menu()
