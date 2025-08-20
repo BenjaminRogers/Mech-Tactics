@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://d4nc47pri16hg"]
 
-[ext_resource type="Script" uid="uid://co2s1iak7rj4u" path="res://scripts/ground_cursor.gd" id="1_261ax"]
+[ext_resource type="Script" uid="uid://co2s1iak7rj4u" path="res://Battle/Scripts/ground_cursor.gd" id="1_261ax"]
 [ext_resource type="PackedScene" uid="uid://b6oaa18lwu088" path="res://3dAssets/ground_cursor.glb" id="2_bx16x"]
-[ext_resource type="Script" uid="uid://blouib3bbr5qw" path="res://scripts/camera_rig.gd" id="3_bx16x"]
+[ext_resource type="Script" uid="uid://blouib3bbr5qw" path="res://Battle/Scripts/camera_rig.gd" id="3_bx16x"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_bx16x"]
 margin = 0.05

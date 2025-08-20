@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://drwct8g02fyi7"]
 
-[ext_resource type="Script" uid="uid://do008lgoo8u40" path="res://scripts/player.gd" id="1_cvnsp"]
+[ext_resource type="Script" uid="uid://do008lgoo8u40" path="res://Battle/Units/unit.gd" id="1_cvnsp"]
 [ext_resource type="PackedScene" uid="uid://ckouewo53hqe1" path="res://3dAssets/PlayerMesh.glb" id="2_6t5aa"]
-[ext_resource type="Script" uid="uid://blouib3bbr5qw" path="res://scripts/camera_rig.gd" id="2_vgqql"]
+[ext_resource type="Script" uid="uid://blouib3bbr5qw" path="res://Battle/Scripts/camera_rig.gd" id="2_vgqql"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6t5aa"]
 height = 1.74606
@@ -15,35 +15,35 @@ bg_color = Color(0.43134, 0.43134, 0.43134, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vgqql"]
 bg_color = Color(0.368627, 0.694118, 0.129412, 1)
 
-[node name="PlayerUnitRoot" type="Node3D"]
+[node name="UnitRoot" type="Node3D"]
 script = ExtResource("1_cvnsp")
 
-[node name="Player" type="CharacterBody3D" parent="."]
+[node name="Unit" type="CharacterBody3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Unit"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.982733, 0)
 shape = SubResource("CapsuleShape3D_6t5aa")
 debug_color = Color(0.302977, 0.607063, 0.459526, 0.42)
 
-[node name="PlayerMesh" parent="Player" instance=ExtResource("2_6t5aa")]
+[node name="PlayerMesh" parent="Unit" instance=ExtResource("2_6t5aa")]
 transform = Transform3D(-0.999722, 0, 0.0235598, 0, 1, 0, -0.0235598, 0, -0.999722, 0, 0, 0)
 
-[node name="Skeleton3D" parent="Player/PlayerMesh/Armature" index="0"]
+[node name="Skeleton3D" parent="Unit/PlayerMesh/Armature" index="0"]
 bones/8/rotation = Quaternion(-0.707012, -0.0115523, -0.0115523, 0.707012)
 bones/9/rotation = Quaternion(-2.07306e-08, 4.62458e-09, 0.0169768, 0.999856)
 bones/11/rotation = Quaternion(-0.707107, 2.66925e-08, -2.66925e-08, 0.707107)
 
-[node name="AnimationPlayer" parent="Player/PlayerMesh" index="1"]
+[node name="AnimationPlayer" parent="Unit/PlayerMesh" index="1"]
 autoplay = "freehand_idle"
 
-[node name="SpringArm3D" type="SpringArm3D" parent="Player"]
+[node name="SpringArm3D" type="SpringArm3D" parent="Unit"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18475, 0)
 shape = SubResource("SphereShape3D_6t5aa")
 script = ExtResource("2_vgqql")
 
-[node name="Camera3D" type="Camera3D" parent="Player/SpringArm3D"]
+[node name="Camera3D" type="Camera3D" parent="Unit/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, -1.49012e-08, 0, 1.49012e-08, 1, 0, 0, 3.17094)
 
 [node name="MiniStatsWindow" type="Control" parent="."]
@@ -132,4 +132,4 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "50/50"
 
-[editable path="Player/PlayerMesh"]
+[editable path="Unit/PlayerMesh"]

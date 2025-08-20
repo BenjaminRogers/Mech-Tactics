@@ -2,11 +2,11 @@
 
 [ext_resource type="MeshLibrary" uid="uid://hml6tfvqal35" path="res://3dAssets/MeshLibraries/geometry_mesh_lib.tres" id="1_t3or0"]
 [ext_resource type="PackedScene" uid="uid://d0od72qwppq6e" path="res://Battle/unit_manager.tscn" id="1_ysn8j"]
-[ext_resource type="PackedScene" uid="uid://drwct8g02fyi7" path="res://Scenes/player.tscn" id="2_ysn8j"]
-[ext_resource type="PackedScene" uid="uid://d4nc47pri16hg" path="res://Scenes/ground_cursor.tscn" id="3_6ll4n"]
+[ext_resource type="PackedScene" uid="uid://drwct8g02fyi7" path="res://Battle/Units/player.tscn" id="2_ysn8j"]
+[ext_resource type="PackedScene" uid="uid://d4nc47pri16hg" path="res://Battle/ground_cursor.tscn" id="3_6ll4n"]
 [ext_resource type="MeshLibrary" uid="uid://chvd04isqgidu" path="res://3dAssets/MeshLibraries/tile_mesh_lib.tres" id="4_kylad"]
-[ext_resource type="Script" uid="uid://chim21g82hxay" path="res://scripts/tile_grid_map.gd" id="5_bdlbp"]
-[ext_resource type="Script" uid="uid://04nqipoq2qq5" path="res://Scenes/path_manager.gd" id="6_2h8qs"]
+[ext_resource type="Script" uid="uid://chim21g82hxay" path="res://Battle/Scripts/tile_grid_map.gd" id="5_bdlbp"]
+[ext_resource type="Script" uid="uid://04nqipoq2qq5" path="res://Battle/Scripts/path_manager.gd" id="6_2h8qs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_folls"]
 sky_top_color = Color(0.31324, 0.440968, 0.704448, 1)

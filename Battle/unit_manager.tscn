@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d0od72qwppq6e"]
 
-[ext_resource type="Script" uid="uid://bqd2bvtmrpxr1" path="res://Battle/unit_manager.gd" id="1_dv4ji"]
+[ext_resource type="Script" uid="uid://bqd2bvtmrpxr1" path="res://Battle/Scripts/unit_manager.gd" id="1_dv4ji"]
 
 [node name="UnitManager" type="Node"]
 script = ExtResource("1_dv4ji")

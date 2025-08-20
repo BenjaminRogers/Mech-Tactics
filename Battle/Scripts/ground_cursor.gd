@@ -5,7 +5,7 @@ var current_grid_position: Vector3
 var current_tile_id: int
 var active_unit: Node3D
 @onready var selected_tile_id: int = -1
-var menu_scene = preload("res://Battle/Menu Templates/unit_menu.tscn")
+var menu_scene = preload("res://Battle/Menu Templates/active_unit_menu.tscn")
 @onready var menu
 @onready var is_menu_open = false
 @onready var is_tile_selected = false
