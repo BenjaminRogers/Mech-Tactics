@@ -1,0 +1,164 @@
+[gd_scene load_steps=13 format=3 uid="uid://clb5k1e3sx5cx"]
+
+[ext_resource type="PackedScene" uid="uid://d0od72qwppq6e" path="res://Battle/unit_manager.tscn" id="1_1itoj"]
+[ext_resource type="PackedScene" uid="uid://bfs8eok2qd7m" path="res://Battle/Units/unit.tscn" id="2_bhyps"]
+[ext_resource type="Script" uid="uid://04nqipoq2qq5" path="res://Battle/Scripts/path_manager.gd" id="3_bhyps"]
+[ext_resource type="Script" uid="uid://b12kw11kig3uw" path="res://Battle/navigation_tile_placer.gd" id="4_irxul"]
+[ext_resource type="Script" uid="uid://dgmfwxu5hubp3" path="res://Battle/geometry_mesh_placer.gd" id="5_bhyps"]
+[ext_resource type="PackedScene" uid="uid://c8ftcclr423l4" path="res://Battle/GeometryMeshes/cube_geometry_mesh.tscn" id="6_nlw30"]
+[ext_resource type="PackedScene" uid="uid://d4nc47pri16hg" path="res://Battle/ground_cursor.tscn" id="7_h5iew"]
+[ext_resource type="PackedScene" uid="uid://y74obwpiiqmx" path="res://Battle/GeometryMeshes/half_cube_geometry_mesh.tscn" id="7_h5vrh"]
+[ext_resource type="PackedScene" uid="uid://c667p4cf5735p" path="res://Battle/GeometryMeshes/short_ramp_60_geometry_mesh.tscn" id="8_oo2kx"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_folls"]
+sky_top_color = Color(0.31324, 0.440968, 0.704448, 1)
+sky_horizon_color = Color(0.787415, 0.807251, 0.859091, 1)
+ground_bottom_color = Color(0.354086, 0.305704, 0.249584, 1)
+ground_horizon_color = Color(0.787415, 0.807251, 0.859091, 1)
+
+[sub_resource type="Sky" id="Sky_3vk6h"]
+sky_material = SubResource("ProceduralSkyMaterial_folls")
+
+[sub_resource type="Environment" id="Environment_xdvni"]
+background_mode = 2
+sky = SubResource("Sky_3vk6h")
+tonemap_mode = 2
+
+[node name="TestRoot" type="Node3D"]
+
+[node name="UnitManager" parent="." instance=ExtResource("1_1itoj")]
+unique_name_in_owner = true
+
+[node name="UnitRoot" parent="UnitManager" instance=ExtResource("2_bhyps")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="PathManager" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_bhyps")
+
+[node name="NavigationTilePlacer" type="Node3D" parent="PathManager"]
+unique_name_in_owner = true
+script = ExtResource("4_irxul")
+
+[node name="GeometryMeshPlacer" type="Node3D" parent="PathManager/NavigationTilePlacer"]
+unique_name_in_owner = true
+script = ExtResource("5_bhyps")
+
+[node name="CubeGeometryMesh" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+
+[node name="CubeGeometryMesh2" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="CubeGeometryMesh3" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="CubeGeometryMesh4" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+
+[node name="CubeGeometryMesh5" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="CubeGeometryMesh6" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="CubeGeometryMesh7" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+
+[node name="CubeGeometryMesh8" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
+
+[node name="CubeGeometryMesh9" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6)
+
+[node name="CubeGeometryMesh10" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 8)
+
+[node name="CubeGeometryMesh11" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="CubeGeometryMesh12" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
+
+[node name="CubeGeometryMesh13" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="CubeGeometryMesh14" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 6)
+
+[node name="CubeGeometryMesh15" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 8)
+
+[node name="CubeGeometryMesh16" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="CubeGeometryMesh17" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
+
+[node name="CubeGeometryMesh18" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 4)
+
+[node name="CubeGeometryMesh19" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
+
+[node name="CubeGeometryMesh20" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 8)
+
+[node name="CubeGeometryMesh21" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="CubeGeometryMesh22" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 2)
+
+[node name="CubeGeometryMesh23" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
+
+[node name="CubeGeometryMesh24" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 6)
+
+[node name="CubeGeometryMesh25" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("6_nlw30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
+
+[node name="HalfCubeGeometryMesh" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("7_h5vrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 12)
+
+[node name="HalfCubeGeometryMesh2" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("7_h5vrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 12)
+
+[node name="HalfCubeGeometryMesh3" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("7_h5vrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 12)
+
+[node name="HalfCubeGeometryMesh4" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("7_h5vrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 12)
+
+[node name="HalfCubeGeometryMesh5" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("7_h5vrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, 12)
+
+[node name="ShortRamp60GeometryMesh" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("8_oo2kx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1, 10)
+
+[node name="ShortRamp60GeometryMesh2" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("8_oo2kx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 1, 10)
+
+[node name="ShortRamp60GeometryMesh3" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("8_oo2kx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4, 1, 10)
+
+[node name="ShortRamp60GeometryMesh4" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("8_oo2kx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6, 1, 10)
+
+[node name="ShortRamp60GeometryMesh5" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("8_oo2kx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 1, 10)
+
+[node name="HalfCubeGeometryMesh6" parent="PathManager/NavigationTilePlacer/GeometryMeshPlacer" instance=ExtResource("7_h5vrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xdvni")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 12, 0)
+shadow_enabled = true
+
+[node name="GroundCursor" parent="." instance=ExtResource("7_h5iew")]
+unique_name_in_owner = true
+
+[connection signal="geometry_variables_set" from="PathManager/NavigationTilePlacer/GeometryMeshPlacer" to="PathManager/NavigationTilePlacer" method="place_tiles"]

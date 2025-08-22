@@ -1,7 +1,7 @@
 extends Control
 
 func _ready() -> void:
-	%MoveButton.grab_focus()
+	%StatusButton.grab_focus()
 
 func _process(delta: float) -> void:
 	pass

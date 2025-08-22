@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=4 uid="uid://c667p4cf5735p"]
+
+[ext_resource type="Script" uid="uid://cns6mvnxsoaty" path="res://Battle/GeometryMeshes/battle_geometry_variables.gd" id="1_0xgk8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swunf"]
+resource_name = "Material.002"
+cull_mode = 2
+albedo_color = Color(0.398731, 0.134517, 0.325827, 1)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_qlspp"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 1, 2),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAgAEAAAAAgADAAQAAAAFAAEAAQAFAAMAAAAEAAUABQAEAAMA"),
+"name": "Material.002",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAAAAAAD//wAAAAAAAP////8AAAAA////////AAAAAAAA//8AAP//AAD//wAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_e58mu"]
+resource_name = "geometry_gridmap_meshes_Cube_002"
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 1, 2),
+"attribute_data": PackedByteArray("/1//v/9f/3//n/9//1//f/+f/z//n/9//1//P/9f/z//XwAA/5//P/8f/3//X/8//1//f/8f/z//n/9//1////9f/7//n/8/"),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUAAwAGAAQABwAIAAkACgALAAwACgANAAsADgAPABAADgARAA8A"),
+"material": SubResource("StandardMaterial3D_swunf"),
+"name": "Material.002",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 18,
+"vertex_data": PackedByteArray("AAAAAAAA/////wAAAAD///////8AAP////8AAAAAVNX///////9U1f////8AAFTV//8AAP//VNX//wAA////vwAAAAD///+//////////78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AABsoAAAAAP//GygAAAAAAAC2wP///////xso/7//v/+//7//v/+/qiqqKqoqqiqqKqoqqiqqKv///////////////wAA/38AAP9/AAD/fwAA/38C6Vs6AulbOpPFQq8C6Vs6")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_qlspp")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0xgk8"]
+points = PackedVector3Array(1, 0, 1, 1, 0, 0, -1, 0, 1, -1, 0, -1, 1, 1, 1, 1, 1, -1)
+
+[node name="ShortRamp60GeometryMesh" type="Node3D"]
+script = ExtResource("1_0xgk8")
+
+[node name="short_ramp_60" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("ArrayMesh_e58mu")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="short_ramp_60"]
+collision_layer = 128
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="short_ramp_60/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_0xgk8")

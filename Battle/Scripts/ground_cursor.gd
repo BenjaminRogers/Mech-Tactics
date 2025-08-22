@@ -5,8 +5,10 @@ var current_grid_position: Vector3
 var current_tile_id: int
 var active_unit: Node3D
 @onready var selected_tile_id: int = -1
-var menu_scene = preload("res://Battle/Menu Templates/active_unit_menu.tscn")
-@onready var menu
+var active_unit_menu_scene = preload("res://Battle/Menu Templates/active_unit_menu.tscn")
+var inactive_unit_menu_scene = preload("res://Battle/Menu Templates/inactive_unit_menu.tscn")
+@onready var active_unit_menu
+@onready var inactive_unit_menu
 @onready var is_menu_open = false
 @onready var is_tile_selected = false
 
@@ -46,16 +48,23 @@ func move_button_up():
 
 
 func open_menu() -> void:
-	if hovered_unit: #Only opens menu if there is a unit selected
-		menu = menu_scene.instantiate()
-		menu.get_node("PanelContainer/MarginContainer/VBoxContainer/MoveButton").pressed.connect(move_button_up)
-		add_child(menu)
+	if hovered_unit == active_unit: #Only opens menu if there is a unit selected
+		active_unit_menu = active_unit_menu_scene.instantiate()
+		active_unit_menu.get_node("PanelContainer/MarginContainer/VBoxContainer/MoveButton").pressed.connect(move_button_up)
+		add_child(active_unit_menu)
 		is_menu_open = true
-
+	else:
+		inactive_unit_menu = inactive_unit_menu_scene.instantiate()
+		#active_unit_menu.get_node() -> add functionality to status button maybe?
+		add_child(inactive_unit_menu)
+		is_menu_open = true
 func close_menu() -> void:
-	if is_instance_valid(menu):
+	if is_instance_valid(active_unit_menu):
 		is_menu_open = false
-		menu.queue_free()
+		active_unit_menu.queue_free()
+	if is_instance_valid(inactive_unit_menu):
+		is_menu_open = false
+		inactive_unit_menu.queue_free()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	start_turn()
@@ -82,7 +91,6 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed("print_debug"):
 			print(str("var current_grid_position: ", current_grid_position))
 			print(str("cursor mesh position: ", global_position))
-			print(str("Player mesh position: ", %Player.global_position))
 			print(str("Active unit: ", active_unit))
 			print(str("Hovered unit var: ", hovered_unit))
 			

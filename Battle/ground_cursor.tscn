@@ -28,6 +28,7 @@ current = true
 
 [node name="UnitDetectionArea" type="Area3D" parent="CharacterBody3D"]
 unique_name_in_owner = true
+collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/UnitDetectionArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
