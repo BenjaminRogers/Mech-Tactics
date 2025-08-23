@@ -45,9 +45,10 @@ points = PackedVector3Array(1, 0, 1, 1, 0, 0, -1, 0, 1, -1, 0, -1, 1, 1, 1, 1, 1
 
 [node name="ShortRamp60GeometryMesh" type="Node3D"]
 script = ExtResource("1_0xgk8")
+type = "ShortRamp60"
 
 [node name="short_ramp_60" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.005, 0)
 mesh = SubResource("ArrayMesh_e58mu")
 skeleton = NodePath("")
 

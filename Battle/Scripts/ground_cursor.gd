@@ -18,7 +18,25 @@ func start_turn() -> void:
 func end_turn() -> void:
 	%UnitManager.calculate_next_active_unit()
 	start_turn()
-
+func height_update() -> void:
+	var collided_tile
+	var collided_tile_mesh
+	var collided_tile_material
+	await get_tree().create_timer(.1).timeout #Need timer to ensure X, Z position is updated before ray cast
+	if %UpRayCast.is_colliding():
+		collided_tile = %UpRayCast.get_collider()
+		#####Change individual instance tile mesh instance without affecting others#####
+		#collided_tile_mesh = collided_tile.get_parent()
+		#collided_tile_material = collided_tile_mesh.get_active_material(0).duplicate()
+		#collided_tile_material.albedo_color = Color(140, 140, 140, 255)
+		#collided_tile_mesh.material_override = collided_tile_material
+		##########################################################################################
+		print(str("UpRayCast: ", collided_tile))
+		position.y = collided_tile.global_position.y
+	elif %DownRayCast.is_colliding():
+		collided_tile = %DownRayCast.get_collider()
+		print(str("DownRayCast: ", collided_tile))
+		position.y = collided_tile.global_position.y
 #Function in charge of showing the stats of the unit that the cursor is currently overlapping
 #Have to call this function every time the cursor moves for any reason (This seems like a pain in the ass)
 #Maybe think of something smarter
@@ -75,18 +93,22 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed("cursor_left"):
 			position.x += GRID_UNIT
 			current_grid_position.x += 1
+			height_update()
 			unit_hovering()
 		if event.is_action_pressed("cursor_right"):
 			position.x += -GRID_UNIT
 			current_grid_position.x += -1
+			height_update()
 			unit_hovering()
 		if event.is_action_pressed("cursor_up"):
 			position.z += GRID_UNIT
 			current_grid_position.z += 1
+			height_update()
 			unit_hovering()
 		if event.is_action_pressed("cursor_down"):
 			position.z += -GRID_UNIT
 			current_grid_position.z += -1
+			height_update()
 			unit_hovering()
 		if event.is_action_pressed("print_debug"):
 			print(str("var current_grid_position: ", current_grid_position))

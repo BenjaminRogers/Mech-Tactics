@@ -45,9 +45,10 @@ points = PackedVector3Array(1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, -2, 1, 1,
 
 [node name="CubeGeometryMesh" type="Node3D"]
 script = ExtResource("1_w0n2y")
+type = "Cube"
 
 [node name="cube" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.005, 0)
 mesh = SubResource("ArrayMesh_lqx36")
 skeleton = NodePath("")
 

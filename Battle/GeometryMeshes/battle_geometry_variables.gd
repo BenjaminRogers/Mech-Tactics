@@ -1,5 +1,5 @@
 extends Node3D
-@export var type:String = "cube"
+@export var type:String
 @export var top_layer: bool
 
 # Called when the node enters the scene tree for the first time.

@@ -40,15 +40,20 @@ shadow_mesh = SubResource("ArrayMesh_whhd0")
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_emoml"]
 data = PackedVector3Array(-1, 0, 1, 1, 1, -1, 1, 1, 1, -1, 0, 1, -1, 0, -1, 1, 1, -1)
+backface_collision = true
 
 [node name="Short60Tile" type="Node3D" groups=["Tiles"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="short_plane_60" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.995, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -1, 0)
 mesh = SubResource("ArrayMesh_4578o")
 skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="short_plane_60"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 64
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="short_plane_60/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 shape = SubResource("ConcavePolygonShape3D_emoml")

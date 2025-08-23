@@ -33,3 +33,17 @@ collision_mask = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/UnitDetectionArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_bx16x")
+
+[node name="UpRayCast" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, 20, 0)
+collision_mask = 64
+hit_from_inside = true
+
+[node name="DownRayCast" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+target_position = Vector3(0, -40, 0)
+collision_mask = 64
+hit_from_inside = true
