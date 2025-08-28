@@ -1,4 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://b15o86viul1ks"]
+[gd_scene load_steps=6 format=3 uid="uid://b15o86viul1ks"]
+
+[ext_resource type="Script" uid="uid://c2hpukrse38w0" path="res://Battle/Tiles/tile.gd" id="1_mmu56"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1btvr"]
 resource_name = "Material.003"
@@ -43,6 +45,7 @@ data = PackedVector3Array(-1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0
 backface_collision = true
 
 [node name="FlatGroundTile" type="Node3D"]
+script = ExtResource("1_mmu56")
 
 [node name="plane" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_8752o")
@@ -50,6 +53,7 @@ skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="plane"]
 collision_layer = 64
+script = ExtResource("1_mmu56")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="plane/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_mbm4m")

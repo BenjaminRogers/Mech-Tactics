@@ -32,11 +32,11 @@ func move(route: PackedVector3Array) -> void:
 	var current_delta = get_process_delta_time()
 	for i in range(1, route.size()):
 		var next_position: Vector3 = (route[i])
-		var next_position_coordinates = next_position * GRID_UNIT
+
 
 ##########################################################################################
 		#I stole this from the internet I have no idea how or why this works
-		var direction = (next_position_coordinates - global_transform.origin).normalized()
+		var direction = (next_position - global_transform.origin).normalized()
 		var target_angle = atan2(direction.x, direction.z)
 		var current_rotation = global_rotation.y
 		var new_rotation_y = rad_to_deg(target_angle)

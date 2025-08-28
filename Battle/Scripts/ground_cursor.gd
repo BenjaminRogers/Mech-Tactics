@@ -1,42 +1,50 @@
 extends Node3D
-const GRID_UNIT = 2
+const GRID_UNIT = 2 #Used to convert from global position to grid position. Each grid coordinate is 2m on center
 @onready var hovered_unit: Node3D
 var current_grid_position: Vector3
 var current_tile_id: int
 var active_unit: Node3D
-@onready var selected_tile_id: int = -1
+var active_unit_tile_id: int
 var active_unit_menu_scene = preload("res://Battle/Menu Templates/active_unit_menu.tscn")
 var inactive_unit_menu_scene = preload("res://Battle/Menu Templates/inactive_unit_menu.tscn")
+
+var tile_material_blue = preload("res://Battle/Tiles/Materials/Blue.tres")
+var tile_material_green = preload("res://Battle/Tiles/Materials/Green.tres")
+var tile_material_red = preload("res://Battle/Tiles/Materials/Red.tres")
+var tile_material_white = preload("res://Battle/Tiles/Materials/White.tres")
+
 @onready var active_unit_menu
 @onready var inactive_unit_menu
 @onready var is_menu_open = false
-@onready var is_tile_selected = false
+@onready var is_unit_moving = false
 
 func start_turn() -> void:
 	active_unit = %UnitManager.active_unit
-
+	position = active_unit.global_position
+	await get_tree().create_timer(.1).timeout
+	active_unit_tile_id = %DownRayCast.get_collider().id
 func end_turn() -> void:
 	%UnitManager.calculate_next_active_unit()
 	start_turn()
+func get_tile_id() -> int:
+	if %DownRayCast.is_colliding():
+		print(str("selected tile:", %DownRayCast.get_collider().id))
+		return %DownRayCast.get_collider().id
+	else:
+		return -1 #This should never happen
+
 func height_update() -> void:
 	var collided_tile
-	var collided_tile_mesh
-	var collided_tile_material
 	await get_tree().create_timer(.1).timeout #Need timer to ensure X, Z position is updated before ray cast
 	if %UpRayCast.is_colliding():
 		collided_tile = %UpRayCast.get_collider()
-		#####Change individual instance tile mesh instance without affecting others#####
-		#collided_tile_mesh = collided_tile.get_parent()
-		#collided_tile_material = collided_tile_mesh.get_active_material(0).duplicate()
-		#collided_tile_material.albedo_color = Color(140, 140, 140, 255)
-		#collided_tile_mesh.material_override = collided_tile_material
-		##########################################################################################
 		print(str("UpRayCast: ", collided_tile))
 		position.y = collided_tile.global_position.y
 	elif %DownRayCast.is_colliding():
 		collided_tile = %DownRayCast.get_collider()
 		print(str("DownRayCast: ", collided_tile))
 		position.y = collided_tile.global_position.y
+
 #Function in charge of showing the stats of the unit that the cursor is currently overlapping
 #Have to call this function every time the cursor moves for any reason (This seems like a pain in the ass)
 #Maybe think of something smarter
@@ -57,12 +65,18 @@ func unit_hovering():
 			hovered_unit.toggle_mini_stats_window_visibility()
 			hovered_unit = null
 		
+		#####Change individual instance tile mesh instance without affecting others#####
+		#collided_tile_mesh = collided_tile.get_parent()
+		#collided_tile_material = collided_tile_mesh.get_active_material(0).duplicate()
+		#collided_tile_material.albedo_color = Color(140, 140, 140, 255)
+		#collided_tile_mesh.material_override = collided_tile_material
+		##########################################################################################
 func move_button_up():
-	current_tile_id = %PathManager.get_tile_id(current_grid_position)
-	selected_tile_id = current_tile_id
+	await get_tree().create_timer(.1).timeout
+	current_tile_id = get_tile_id()
 	close_menu()
 	is_menu_open = false
-	is_tile_selected = true
+	is_unit_moving = true
 
 
 func open_menu() -> void:
@@ -85,7 +99,7 @@ func close_menu() -> void:
 		inactive_unit_menu.queue_free()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	start_turn()
+	pass
 func _physics_process(delta: float) -> void:
 	pass
 func _input(event: InputEvent) -> void:
@@ -115,19 +129,24 @@ func _input(event: InputEvent) -> void:
 			print(str("cursor mesh position: ", global_position))
 			print(str("Active unit: ", active_unit))
 			print(str("Hovered unit var: ", hovered_unit))
+			print(str("tile ID variable:"),%DownRayCast.get_collider().id)
+			print(str("Tile position:"), %DownRayCast.get_collider().position)
+			print(str("Tile Global position:", %DownRayCast.get_collider().global_position))
 			
 		if event.is_action_pressed("jump_debug"):
 			end_turn()
 		if event.is_action_released("accept"):
-			if not hovered_unit:
-				position = active_unit.position
+			if not hovered_unit and not is_unit_moving:
+				position = active_unit.global_position
 				unit_hovering()
-			if is_tile_selected:
-				current_tile_id = %PathManager.get_tile_id(current_grid_position)
-				var movement_route = %PathManager.get_route(selected_tile_id, current_tile_id)
-				active_unit.move(movement_route)
-				is_tile_selected = false
+			if is_unit_moving:
+				current_tile_id = get_tile_id()
+				var movement_route = %PathManager.get_route(active_unit_tile_id, current_tile_id)
+				await active_unit.move(movement_route)
+				is_unit_moving = false
+				end_turn()
 			else:
+					unit_hovering()
 					open_menu()
 	if event.is_action_released("cancel"):
 		close_menu()

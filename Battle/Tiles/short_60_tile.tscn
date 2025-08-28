@@ -1,4 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://qw8kfrkmfl20"]
+[gd_scene load_steps=6 format=3 uid="uid://qw8kfrkmfl20"]
+
+[ext_resource type="Script" uid="uid://c2hpukrse38w0" path="res://Battle/Tiles/tile.gd" id="1_5gh2g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1btvr"]
 resource_name = "Material.003"
@@ -42,8 +44,9 @@ shadow_mesh = SubResource("ArrayMesh_whhd0")
 data = PackedVector3Array(-1, 0, 1, 1, 1, -1, 1, 1, 1, -1, 0, 1, -1, 0, -1, 1, 1, -1)
 backface_collision = true
 
-[node name="Short60Tile" type="Node3D" groups=["Tiles"]]
+[node name="Short60Tile" type="Node3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+script = ExtResource("1_5gh2g")
 
 [node name="short_plane_60" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -1, 0)
@@ -53,6 +56,7 @@ skeleton = NodePath("")
 [node name="StaticBody3D" type="StaticBody3D" parent="short_plane_60"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 64
+script = ExtResource("1_5gh2g")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="short_plane_60/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
