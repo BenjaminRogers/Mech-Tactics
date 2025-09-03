@@ -25,6 +25,7 @@ func place_tiles():
 				add_child(tall_60_tile)
 				tall_60_tile.position = %GeometryMeshPlacer.geometry_array[i].position
 				tall_60_tile.rotation += %GeometryMeshPlacer.geometry_array[i].rotation
+	print("Tiles placed")
 	navigation_tiles_placed.emit()
 func _ready() -> void:
 	pass

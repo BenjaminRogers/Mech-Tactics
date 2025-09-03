@@ -45,6 +45,7 @@ data = PackedVector3Array(-1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0
 backface_collision = true
 
 [node name="FlatGroundTile" type="Node3D"]
+visible = false
 script = ExtResource("1_mmu56")
 
 [node name="plane" type="MeshInstance3D" parent="."]

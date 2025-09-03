@@ -75,6 +75,7 @@ func move_button_up():
 	await get_tree().create_timer(.1).timeout
 	current_tile_id = get_tile_id()
 	close_menu()
+	%PathManager.get_movement_range(active_unit)
 	is_menu_open = false
 	is_unit_moving = true
 
@@ -130,11 +131,12 @@ func _input(event: InputEvent) -> void:
 			print(str("Active unit: ", active_unit))
 			print(str("Hovered unit var: ", hovered_unit))
 			print(str("tile ID variable:"),%DownRayCast.get_collider().id)
-			print(str("Tile position:"), %DownRayCast.get_collider().position)
+			print(str("movement cost: "), %PathManager.astar._compute_cost(0, 4))
 			print(str("Tile Global position:", %DownRayCast.get_collider().global_position))
 			
 		if event.is_action_pressed("jump_debug"):
-			end_turn()
+			#end_turn()
+			%PathManager.get_movement_range(active_unit)
 		if event.is_action_released("accept"):
 			if not hovered_unit and not is_unit_moving:
 				position = active_unit.global_position
@@ -150,5 +152,6 @@ func _input(event: InputEvent) -> void:
 					open_menu()
 	if event.is_action_released("cancel"):
 		close_menu()
+		%PathManager.disable_visible_tiles()
 	
 	

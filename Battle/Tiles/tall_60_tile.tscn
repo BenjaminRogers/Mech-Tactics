@@ -45,6 +45,7 @@ data = PackedVector3Array(-1, 1, 1, 1, 2, -1, 1, 2, 1, -1, 1, 1, -1, 1, -1, 1, 2
 backface_collision = true
 
 [node name="Tall60Tile" type="Node3D"]
+visible = false
 script = ExtResource("1_q6vp4")
 
 [node name="tall_plane_60" type="MeshInstance3D" parent="."]

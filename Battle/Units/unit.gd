@@ -4,7 +4,7 @@ const GRID_UNIT = 2
 @onready var animation_player = $PlayerMesh/AnimationPlayer
 @onready var mini_stats_window = %MiniStatsWindow
 ### Stats ###
-@export var movement = 5
+@export var movement = 2
 @export var charge_time = 0
 @export var charge_speed = 5
 @export var max_health = 100
