@@ -3,6 +3,7 @@ extends Node
 const CHARGE_TIME_MAX = 100
 @onready var active_unit
 signal send_unit_node
+var turn_count = 0
 
 func calculate_next_active_unit():
 	var done = false
@@ -15,7 +16,8 @@ func calculate_next_active_unit():
 						unit.charge_time = 0
 						active_unit = unit
 						done = true
-						print(str("active unit is: ", active_unit))
+						turn_count += 1
+						print(str("active unit is: ", active_unit, " turn count: ", turn_count))
 						break
 						
 func _ready() -> void:
