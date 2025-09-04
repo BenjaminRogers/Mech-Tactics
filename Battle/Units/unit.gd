@@ -18,7 +18,10 @@ func initialize_menu() -> void:
 	%HPBar.value = current_health
 	%HPNumeric.text = str(current_health, "/", max_health)
 	%CTBar.value = charge_time
-
+func update_menus() -> void:
+	%HPBar.value = current_health
+	%HPNumeric.text = str(current_health, "/", max_health)
+	%CTBar.value = charge_time
 func toggle_mini_stats_window_visibility() -> void:
 	if mini_stats_window.visible:
 		mini_stats_window.visible = false
@@ -44,6 +47,12 @@ func move(route: PackedVector3Array) -> void:
 ###########################################################################################
 		#position += transform.basis.z * GRID_UNIT #This makes the character move 1 tile forward instantly
 		var end_position = position + (transform.basis.z * GRID_UNIT)#This makes the character move smoothly 1 grid_unit per second
+		
+		if next_position.y > end_position.y:
+			end_position = end_position + (transform.basis.y * (next_position.y - end_position.y))
+		elif next_position.y < end_position.y:
+			end_position = end_position - (transform.basis.y * (end_position.y - next_position.y))
+		
 		var movement_tween = create_tween()
 		movement_tween.tween_property(self,"position",end_position,1)#1 is the duration in seconds to move 1 tile. Need to incorporate speed at some point
 		%Unit/PlayerMesh/AnimationPlayer.play("freehand_walk")

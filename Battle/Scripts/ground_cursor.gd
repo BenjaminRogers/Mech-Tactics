@@ -22,6 +22,7 @@ func start_turn() -> void:
 	active_unit = %UnitManager.active_unit
 	position = active_unit.global_position
 	await get_tree().create_timer(.1).timeout
+	unit_hovering()
 	active_unit_tile_id = %DownRayCast.get_collider().id
 func end_turn() -> void:
 	%UnitManager.calculate_next_active_unit()
@@ -141,17 +142,24 @@ func _input(event: InputEvent) -> void:
 			if not hovered_unit and not is_unit_moving:
 				position = active_unit.global_position
 				unit_hovering()
-			if is_unit_moving:
+			if is_unit_moving: 
 				current_tile_id = get_tile_id()
-				var movement_route = %PathManager.get_route(active_unit_tile_id, current_tile_id)
-				await active_unit.move(movement_route)
-				is_unit_moving = false
-				end_turn()
+				if %DownRayCast.get_collider().get_parent().get_parent().visible == true: #Only moves if the tile is within movement range
+					var movement_route = %PathManager.get_route(active_unit_tile_id, current_tile_id)
+					%PathManager.disable_visible_tiles()
+					await active_unit.move(movement_route)
+					is_unit_moving = false
+					end_turn()
 			else:
 					unit_hovering()
 					open_menu()
 	if event.is_action_released("cancel"):
-		close_menu()
-		%PathManager.disable_visible_tiles()
+		if is_menu_open:
+			close_menu()
+			is_menu_open = false
+		if is_unit_moving:
+			%PathManager.disable_visible_tiles()
+			is_unit_moving = false
+			open_menu()
 	
 	

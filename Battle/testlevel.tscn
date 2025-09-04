@@ -33,6 +33,11 @@ unique_name_in_owner = true
 [node name="UnitRoot" parent="UnitManager" instance=ExtResource("2_bhyps")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
+[node name="UnitRoot2" parent="UnitManager" instance=ExtResource("2_bhyps")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
+charge_time = 10
+current_health = 50
+
 [node name="PathManager" type="Node3D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_bhyps")

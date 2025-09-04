@@ -49,7 +49,6 @@ func get_movement_range(unit: Node3D) -> void:
 	var max_x = unit.global_position.x + movement
 	var min_z = unit.global_position.z - movement
 	var max_z = unit.global_position.z + movement
-	var max_possible_range: Array = []
 	
 	for tile in tile_array:
 		var tile_static_body = tile.get_child(0).get_child(0)
