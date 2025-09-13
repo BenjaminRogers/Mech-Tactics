@@ -32,10 +32,13 @@ unique_name_in_owner = true
 
 [node name="UnitRoot" parent="UnitManager" instance=ExtResource("2_bhyps")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+movement = 4
+current_health = 18
 
 [node name="UnitRoot2" parent="UnitManager" instance=ExtResource("2_bhyps")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
-charge_time = 10
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+movement = 5
+charge_time = 25
 current_health = 50
 
 [node name="PathManager" type="Node3D" parent="."]
@@ -166,7 +169,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0, 8)
 
 [node name="TallRamp60GeometryMesh4" parent="PathManager/GeometryMeshPlacer" instance=ExtResource("8_nlw30")]
-transform = Transform3D(-5.96046e-08, 0, -1, 0, 1, 0, 1, 0, -5.96046e-08, 6, 10, 6)
+transform = Transform3D(-5.96046e-08, 0, -1, 0, 1, 0, 1, 0, -5.96046e-08, 13, 10, 6)
 
 [node name="NavigationTilePlacer" type="Node3D" parent="PathManager"]
 unique_name_in_owner = true

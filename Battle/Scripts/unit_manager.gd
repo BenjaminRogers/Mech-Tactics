@@ -20,6 +20,10 @@ func calculate_next_active_unit():
 						print(str("active unit is: ", active_unit, " turn count: ", turn_count))
 						break
 						
+func remove_unit(dead_unit: Unit) -> void:
+	dead_unit.queue_free()
+	await dead_unit.tree_exited
+	unit_array = get_children()
 func _ready() -> void:
 	unit_array = get_children()
 	calculate_next_active_unit()

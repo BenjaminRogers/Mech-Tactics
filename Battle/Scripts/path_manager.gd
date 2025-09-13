@@ -60,6 +60,25 @@ func get_movement_range(unit: Node3D) -> void:
 			tile_mesh.material_override = tile_material_blue
 			tile.visible = true
 			visible_tile_array.push_front(tile)
+func get_attack_range(unit: Node3D, weapon: Weapon) -> void:
+	var starting_position = unit.global_position
+	var starting_position_id = astar.get_closest_point(starting_position)
+	var unit_tile_id
+	var min_x = unit.global_position.x - weapon.range
+	var max_x = unit.global_position.x + weapon.range
+	var min_z = unit.global_position.z - weapon.range
+	var max_z = unit.global_position.z + weapon.range
+	
+	for tile in tile_array:
+		var tile_static_body = tile.get_child(0).get_child(0)
+		var tile_id = astar.get_closest_point(tile.global_position)
+		var route = astar.get_point_path(starting_position_id, tile_id)
+		var route_length = route.size() - 1
+		if route_length <= weapon.range and route.size() != 1:
+			var tile_mesh = tile.get_child(0)
+			tile_mesh.material_override = tile_material_red
+			tile.visible = true
+			visible_tile_array.push_front(tile)
 func _ready() -> void:
 	pass
 #func _process(delta: float) -> void:
