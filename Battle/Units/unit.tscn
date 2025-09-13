@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bfs8eok2qd7m"]
+[gd_scene load_steps=9 format=3 uid="uid://bfs8eok2qd7m"]
 
 [ext_resource type="Script" uid="uid://do008lgoo8u40" path="res://Battle/Units/unit.gd" id="1_80pc5"]
 [ext_resource type="PackedScene" uid="uid://ckouewo53hqe1" path="res://3dAssets/PlayerMesh.glb" id="2_jcjrx"]
 [ext_resource type="Script" uid="uid://blouib3bbr5qw" path="res://Battle/Scripts/camera_rig.gd" id="3_5eii0"]
+[ext_resource type="PackedScene" uid="uid://b53o4s3x3yc72" path="res://Battle/Weapons/gatling_gun.tscn" id="4_jcjrx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6t5aa"]
 height = 1.74606
@@ -46,6 +47,15 @@ script = ExtResource("3_5eii0")
 
 [node name="Camera3D" type="Camera3D" parent="Unit/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, -1.49012e-08, 0, 1.49012e-08, 1, 0, 0, 3.17094)
+
+[node name="Weapons" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Gatling Gun" parent="Weapons" instance=ExtResource("4_jcjrx")]
+
+[node name="Gatling Gun2" parent="Weapons" instance=ExtResource("4_jcjrx")]
+
+[node name="Gatling Gun3" parent="Weapons" instance=ExtResource("4_jcjrx")]
 
 [node name="MiniStatsWindow" type="Control" parent="."]
 unique_name_in_owner = true

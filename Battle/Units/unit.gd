@@ -1,8 +1,9 @@
-extends Node3D
+class_name Unit extends Node3D
 const GRID_UNIT = 2
 @onready var direction
 @onready var animation_player = $PlayerMesh/AnimationPlayer
 @onready var mini_stats_window = %MiniStatsWindow
+@onready var is_allowed_to_move: bool = true
 ### Stats ###
 @export var movement = 2
 @export var charge_time = 0
@@ -30,7 +31,8 @@ func toggle_mini_stats_window_visibility() -> void:
 
 func _ready() -> void:
 	initialize_menu()
-
+func attack_target(weapon: Weapon, target: Unit) -> void:
+	target.current_health -= weapon.damage
 func move(route: PackedVector3Array) -> void:
 	var current_delta = get_process_delta_time()
 	for i in range(1, route.size()):
@@ -63,5 +65,5 @@ func _physics_process(delta: float) -> void:
 	pass
 	#position = global_transform.origin.move_toward(Vector3(4,0,10),.01) <-- Moves towards point
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("jump_debug"):
-		current_health -= 5
+	pass#if event.is_action_pressed("jump_debug"):
+		#current_health -= 5

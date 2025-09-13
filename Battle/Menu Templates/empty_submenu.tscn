@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://briyjrex57f1s"]
+
+[ext_resource type="Script" uid="uid://dwi0efmok62uc" path="res://Battle/Menu Templates/submenu.gd" id="1_ckf1p"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ckf1p")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 111.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
