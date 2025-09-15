@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcid1wrtm33rm"]
+[gd_scene load_steps=3 format=3 uid="uid://dcid1wrtm33rm"]
 
 [ext_resource type="Script" uid="uid://da1ubufsc0470" path="res://Battle/Menu Templates/active_unit_menu.gd" id="1_nvwyu"]
+[ext_resource type="Theme" uid="uid://boxke32n7elgu" path="res://Battle/Menu Templates/Themes/BattleMenuTheme.tres" id="1_r2us5"]
 
 [node name="ActiveUnitMenu" type="Control"]
 layout_mode = 3
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_r2us5")
 script = ExtResource("1_nvwyu")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -17,6 +19,9 @@ offset_left = 30.0
 offset_top = 30.0
 offset_right = 95.0
 offset_bottom = 71.0
+
+[node name="Panel" type="Panel" parent="PanelContainer"]
+layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2

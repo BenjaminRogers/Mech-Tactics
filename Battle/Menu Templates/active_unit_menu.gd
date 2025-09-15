@@ -6,7 +6,7 @@ func _ready() -> void:
 	%MoveButton.grab_focus()
 	%MoveButton.pressed.connect(get_parent().move_button_up)
 	%ActButton.pressed.connect(open_weapon_menu)
-	%WaitButton.pressed.connect(get_parent().end_turn)
+	%WaitButton.pressed.connect(get_parent().wait_button_up)
 func open_weapon_menu():
 	var active_unit = get_parent().active_unit
 	var sub_menu = action_menu.instantiate()
@@ -23,5 +23,7 @@ func open_weapon_menu():
 			weapon_button.setup()
 		add_child(sub_menu)
 		sub_menu.focus_first_element()
+func disable_move_button() -> void:
+	%MoveButton.disabled = true
 func _process(delta: float) -> void:
 	pass

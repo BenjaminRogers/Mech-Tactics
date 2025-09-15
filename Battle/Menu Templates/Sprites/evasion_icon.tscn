@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk62hijbwq403"]
+
+[ext_resource type="Texture2D" uid="uid://crdypgfxx5057" path="res://Battle/Menu Templates/Sprites/EvasionSymbol.png" id="1_dtv46"]
+
+[node name="TextureRect" type="TextureRect"]
+texture_filter = 1
+texture = ExtResource("1_dtv46")

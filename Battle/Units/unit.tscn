@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bfs8eok2qd7m"]
+[gd_scene load_steps=10 format=3 uid="uid://bfs8eok2qd7m"]
 
 [ext_resource type="Script" uid="uid://do008lgoo8u40" path="res://Battle/Units/unit.gd" id="1_80pc5"]
 [ext_resource type="PackedScene" uid="uid://ckouewo53hqe1" path="res://3dAssets/PlayerMesh.glb" id="2_jcjrx"]
 [ext_resource type="Script" uid="uid://blouib3bbr5qw" path="res://Battle/Scripts/camera_rig.gd" id="3_5eii0"]
 [ext_resource type="PackedScene" uid="uid://b53o4s3x3yc72" path="res://Battle/Weapons/gatling_gun.tscn" id="4_jcjrx"]
+[ext_resource type="PackedScene" uid="uid://brkkuvyywqpxg" path="res://Battle/Weapons/melee.tscn" id="5_5eii0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6t5aa"]
 height = 1.74606
@@ -53,9 +54,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 
 [node name="Gatling Gun" parent="Weapons" instance=ExtResource("4_jcjrx")]
 
-[node name="Gatling Gun2" parent="Weapons" instance=ExtResource("4_jcjrx")]
-
-[node name="Gatling Gun3" parent="Weapons" instance=ExtResource("4_jcjrx")]
+[node name="Melee" parent="Weapons" instance=ExtResource("5_5eii0")]
 
 [node name="MiniStatsWindow" type="Control" parent="."]
 unique_name_in_owner = true
@@ -81,29 +80,39 @@ theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MiniStatsWindow/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MiniStatsWindow/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MiniStatsWindow/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MiniStatsWindow/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Evasion:"
+
+[node name="EvasionContainer" type="HBoxContainer" parent="MiniStatsWindow/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MiniStatsWindow/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MiniStatsWindow/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MiniStatsWindow/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="HPLabel" type="Label" parent="MiniStatsWindow/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="HPLabel" type="Label" parent="MiniStatsWindow/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "HP:"
 
-[node name="Label2" type="Label" parent="MiniStatsWindow/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Ammo:"
-
-[node name="CTLabel" type="Label" parent="MiniStatsWindow/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="CTLabel" type="Label" parent="MiniStatsWindow/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "CT:"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MiniStatsWindow/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MiniStatsWindow/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="HPBar" type="ProgressBar" parent="MiniStatsWindow/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="HPBar" type="ProgressBar" parent="MiniStatsWindow/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
@@ -111,14 +120,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_6t5aa")
 theme_override_styles/fill = SubResource("StyleBoxFlat_vgqql")
 value = 100.0
 
-[node name="ProgressBar2" type="ProgressBar" parent="MiniStatsWindow/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(50, 20)
-layout_mode = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_6t5aa")
-theme_override_styles/fill = SubResource("StyleBoxFlat_vgqql")
-value = 100.0
-
-[node name="CTBar" type="ProgressBar" parent="MiniStatsWindow/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="CTBar" type="ProgressBar" parent="MiniStatsWindow/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
@@ -126,19 +128,15 @@ theme_override_styles/background = SubResource("StyleBoxFlat_6t5aa")
 theme_override_styles/fill = SubResource("StyleBoxFlat_vgqql")
 value = 100.0
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="MiniStatsWindow/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="MiniStatsWindow/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="HPNumeric" type="Label" parent="MiniStatsWindow/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3"]
+[node name="HPNumeric" type="Label" parent="MiniStatsWindow/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "50/50"
 
-[node name="Label2" type="Label" parent="MiniStatsWindow/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3"]
-layout_mode = 2
-text = "50/50"
-
-[node name="CTNumeric" type="Label" parent="MiniStatsWindow/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3"]
+[node name="CTNumeric" type="Label" parent="MiniStatsWindow/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "50/50"

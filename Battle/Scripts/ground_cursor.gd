@@ -3,7 +3,7 @@ const GRID_UNIT = 2 #Used to convert from global position to grid position. Each
 @onready var hovered_unit: Node3D
 var current_grid_position: Vector3
 var current_tile_id: int
-var active_unit: Node3D
+var active_unit: Unit
 var active_unit_tile_id: int
 var active_unit_menu_scene = preload("res://Battle/Menu Templates/active_unit_menu.tscn")
 var inactive_unit_menu_scene = preload("res://Battle/Menu Templates/inactive_unit_menu.tscn")
@@ -21,13 +21,16 @@ var tile_material_white = preload("res://Battle/Tiles/Materials/White.tres")
 
 func start_turn() -> void:
 	active_unit = %UnitManager.active_unit
+	selected_weapon = null
 	position = active_unit.global_position
 	await get_tree().create_timer(.1).timeout
+	active_unit.evasion = 0
+	active_unit.remove_evasion_icons()
 	unit_hovering()
 	active_unit_tile_id = %DownRayCast.get_collider().id
 	active_unit.is_allowed_to_move = true
 func end_turn() -> void:
-	%UnitManager.calculate_next_active_unit()
+	await %UnitManager.calculate_next_active_unit()
 	start_turn()
 func get_tile_id() -> int:
 	if %DownRayCast.is_colliding():
@@ -82,6 +85,10 @@ func weapon_selected(weapon: Weapon):
 	%PathManager.get_attack_range(active_unit, selected_weapon)
 	is_unit_attacking = true
 	close_menu()
+
+func wait_button_up():
+	close_menu()
+	end_turn()
 func move_button_up():
 	if active_unit.is_allowed_to_move:
 		await get_tree().create_timer(.1).timeout
@@ -96,6 +103,8 @@ func open_menu() -> void:
 	if hovered_unit == active_unit: #Only opens menu if there is a unit selected
 		active_unit_menu = active_unit_menu_scene.instantiate()
 		add_child(active_unit_menu)
+		if not active_unit.is_allowed_to_move:
+			active_unit_menu.disable_move_button()
 		active_unit_menu.cursor = self
 		is_menu_open = true
 	else:
@@ -160,9 +169,10 @@ func _input(event: InputEvent) -> void:
 				if %DownRayCast.get_collider().get_parent().get_parent().visible == true: #Only moves if the tile is within movement range
 					var movement_route = %PathManager.get_route(active_unit_tile_id, current_tile_id)
 					%PathManager.disable_visible_tiles()
-					await active_unit.move(movement_route)
 					is_unit_moving = false
 					active_unit.is_allowed_to_move = false
+					await active_unit.move(movement_route)
+					unit_hovering()
 			elif is_unit_attacking:
 				if %DownRayCast.get_collider().get_parent().get_parent().visible == true:
 					if %UnitDetectionArea.has_overlapping_bodies():

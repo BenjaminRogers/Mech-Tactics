@@ -1,7 +1,8 @@
 class_name Weapon extends Node3D
-var range = 3
-var damage = 20
-var string_name = "Gatling Gun"
+@export var range: int
+@export var damage: int
+@export var string_name: String
+@export var accuracy: float = 100.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
