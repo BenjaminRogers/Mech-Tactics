@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://brkkuvyywqpxg"]
+
+[ext_resource type="Script" uid="uid://btukd3ijpsi1y" path="res://Battle/Weapons/weapon_class.gd" id="1_nfyhn"]
+
+[node name="Melee" type="Node3D"]
+script = ExtResource("1_nfyhn")
+range = 1
+damage = 30
+string_name = "Melee"
+metadata/_custom_type_script = "uid://btukd3ijpsi1y"

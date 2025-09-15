@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://boxke32n7elgu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5id4"]
+bg_color = Color(0.450648, 0.450648, 0.450648, 1)
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_disabled_color = Color(0.129558, 0.129559, 0.129558, 1)
+Button/styles/disabled = null
+Panel/styles/panel = SubResource("StyleBoxFlat_l5id4")

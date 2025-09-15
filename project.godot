@@ -145,6 +145,12 @@ jump_debug={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_3="Units"
+3d_physics/layer_7="Tiles"
+3d_physics/layer_8="Geometry"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
