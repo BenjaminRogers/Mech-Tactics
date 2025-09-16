@@ -62,9 +62,9 @@ visible = false
 layout_mode = 3
 anchor_top = 0.852
 anchor_bottom = 0.852
-offset_left = 1.0
+offset_left = -274.0
 offset_top = -0.0960083
-offset_right = 41.0
+offset_right = -234.0
 offset_bottom = 39.904
 grow_vertical = 0
 
@@ -140,5 +140,9 @@ text = "50/50"
 unique_name_in_owner = true
 layout_mode = 2
 text = "50/50"
+
+[node name="FloatingTextOrigin" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [editable path="Unit/PlayerMesh"]

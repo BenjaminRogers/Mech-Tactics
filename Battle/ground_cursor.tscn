@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://d4nc47pri16hg"]
+[gd_scene load_steps=7 format=3 uid="uid://d4nc47pri16hg"]
 
 [ext_resource type="Script" uid="uid://co2s1iak7rj4u" path="res://Battle/Scripts/ground_cursor.gd" id="1_261ax"]
 [ext_resource type="PackedScene" uid="uid://b6oaa18lwu088" path="res://3dAssets/ground_cursor.glb" id="2_bx16x"]
@@ -9,6 +9,9 @@ margin = 0.05
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bx16x"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_oralp"]
+size = Vector3(0.2, 0.2, 0.2)
+
 [node name="GroundCursor" type="Node3D"]
 script = ExtResource("1_261ax")
 
@@ -18,7 +21,7 @@ script = ExtResource("1_261ax")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CharacterBody3D"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.5, 0)
+transform = Transform3D(-1, 0, 8.74227e-08, 0, 1, 0, -8.74227e-08, 0, -1, 0, 1.5, 0)
 shape = SubResource("SphereShape3D_bx16x")
 script = ExtResource("3_bx16x")
 
@@ -33,6 +36,10 @@ collision_mask = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/UnitDetectionArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_bx16x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 1.21391)
+mesh = SubResource("BoxMesh_oralp")
 
 [node name="UpRayCast" type="RayCast3D" parent="."]
 unique_name_in_owner = true

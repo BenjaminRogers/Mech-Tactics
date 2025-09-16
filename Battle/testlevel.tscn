@@ -33,7 +33,7 @@ unique_name_in_owner = true
 [node name="UnitRoot" parent="UnitManager" instance=ExtResource("2_bhyps")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 movement = 4
-current_health = 18
+current_health = 100
 
 [node name="UnitRoot2" parent="UnitManager" instance=ExtResource("2_bhyps")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)

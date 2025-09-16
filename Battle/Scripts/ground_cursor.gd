@@ -12,7 +12,7 @@ var tile_material_blue = preload("res://Battle/Tiles/Materials/Blue.tres")
 var tile_material_green = preload("res://Battle/Tiles/Materials/Green.tres")
 var tile_material_red = preload("res://Battle/Tiles/Materials/Red.tres")
 var tile_material_white = preload("res://Battle/Tiles/Materials/White.tres")
-
+var my_basis = Basis.IDENTITY
 @onready var active_unit_menu
 @onready var inactive_unit_menu
 @onready var is_menu_open = false
@@ -127,22 +127,22 @@ func _physics_process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if not is_menu_open:
 		if event.is_action_pressed("cursor_left"):
-			position.x += GRID_UNIT
+			position += transform.basis.x * GRID_UNIT
 			current_grid_position.x += 1
 			height_update()
 			unit_hovering()
 		if event.is_action_pressed("cursor_right"):
-			position.x += -GRID_UNIT
+			position -= transform.basis.x * GRID_UNIT
 			current_grid_position.x += -1
 			height_update()
 			unit_hovering()
 		if event.is_action_pressed("cursor_up"):
-			position.z += GRID_UNIT
+			position += transform.basis.z * GRID_UNIT
 			current_grid_position.z += 1
 			height_update()
 			unit_hovering()
 		if event.is_action_pressed("cursor_down"):
-			position.z += -GRID_UNIT
+			position -= transform.basis.z * GRID_UNIT
 			current_grid_position.z += -1
 			height_update()
 			unit_hovering()

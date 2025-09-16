@@ -4,6 +4,8 @@ const GRID_UNIT = 2
 @onready var animation_player = $PlayerMesh/AnimationPlayer
 @onready var mini_stats_window = %MiniStatsWindow
 @onready var is_allowed_to_move: bool = true
+var mini_stats_window_default_position = Vector2(-274.0, 552.0)
+var mini_stats_window_display_position = Vector2(0.0, 552.0)
 var evasion_icon = preload("res://Battle/Menu Templates/Sprites/evasion_icon.tscn")
 var evasion: int = 0
 const EVASION_WEIGHT = 7.5
@@ -27,10 +29,18 @@ func update_menus() -> void:
 	%HPNumeric.text = str(current_health, "/", max_health)
 	%CTBar.value = charge_time
 func toggle_mini_stats_window_visibility() -> void:
+	var movement_tween = create_tween()
+	movement_tween.set_parallel(true)
 	if mini_stats_window.visible:
+		mini_stats_window.position = mini_stats_window_display_position
+		movement_tween.tween_property(mini_stats_window, "position", mini_stats_window_default_position, .2)
+		await movement_tween.finished
 		mini_stats_window.visible = false
 	elif mini_stats_window.visible == false:
 		mini_stats_window.visible = true
+		mini_stats_window.position = mini_stats_window_default_position
+		movement_tween.tween_property(mini_stats_window, "position", mini_stats_window_display_position, .2)
+		await movement_tween.finished
 
 func add_evasion_icons() -> void:
 	for i in evasion:
@@ -53,9 +63,11 @@ func attack_target(weapon: Weapon, target: Unit) -> void:
 	print(str("random_roll: "), random_roll)
 	if random_roll < hit_chance:
 		print("Hit!")
+		FloatingText.display_text(weapon.damage, target.get_node("FloatingTextOrigin").global_position)
 		target.current_health -= weapon.damage
 	else:
 		print("Miss!")
+		FloatingText.display_text("Missed!", target.get_node("FloatingTextOrigin").global_position)
 func move(route: PackedVector3Array) -> void:
 	var current_delta = get_process_delta_time()
 	for i in range(1, route.size()):

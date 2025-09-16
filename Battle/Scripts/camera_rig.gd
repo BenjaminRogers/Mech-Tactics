@@ -2,6 +2,7 @@ extends SpringArm3D
 
 @onready var camera: Camera3D = $Camera3D
 @export var turn_rate := 150
+var default_y_rotation = rotation_degrees.y
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Mech Tactics"
-run/main_scene="uid://bhmdima85kn5g"
+run/main_scene="uid://clb5k1e3sx5cx"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+FloatingText="*res://Battle/Scripts/Singletons/floating_text.gd"
 
 [editor]
 
